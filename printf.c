@@ -50,6 +50,10 @@ int _printf(const char *format, ...)
                 case '%':
                     write(1, "%", 1);
                     count++;
+		    if (*(ptr + 1) != '\0') {
+			write(1, ptr + 1, 1);
+			count++;
+		    }
                     break;
                 default:
                     write(1, "%", 1);
