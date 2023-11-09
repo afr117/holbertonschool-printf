@@ -3,12 +3,6 @@
 #include <unistd.h>
 #include <stdio.h>
 
-/**
- * _printf - Custom printf function
- * @format: Format string
- * Return: Number of characters printed
- */
-
 int _printf(const char *format, ...)
 {
     va_list args;
@@ -30,8 +24,7 @@ int _printf(const char *format, ...)
                     str = va_arg(args, char *);
                     if (str)
                     {
-                        printf("Received string: %s\n");
-
+                        printf("Received non-NULL string: %s\n", str);
                         while (*str)
                         {
                             write(1, str, 1);
@@ -41,21 +34,17 @@ int _printf(const char *format, ...)
                     }
                     else
                     {
-                        printf("Received NULL string\n");
-
+                        printf("Received NULL string\n");  
                         write(1, "(null)", 6);
                         count += 6;
                     }
                     break;
                 case '%':
-                    printf("Received '%%'\n");
-
+                    printf("Received %% character\n");
                     write(1, "%", 1);
                     count++;
                     break;
                 default:
-                    printf("Received unknown format: %%%c\n", *ptr);
-
                     write(1, "%", 1);
                     write(1, ptr, 1);
                     count += 2;
